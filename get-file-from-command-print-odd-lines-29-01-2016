@@ -1,0 +1,53 @@
+// function starts
+function getoddline(filename)
+{
+   var fs = require("fs");
+
+   fs.readFile(filename,'utf8',function (err, data) 
+   {
+       if (err) 
+    	{
+    		return console.error(err);
+
+    	}
+    
+       var lines = data.split("\n");
+       //printing odd numbers
+   for (i=0;i<=lines.length;)
+       {
+     console.log(lines[i]);
+    i=i+2;
+       }
+   });
+
+  console.log("Program Ended");
+
+}
+//function ends
+
+//get file name from user
+var chunk;
+process.stdin.setEncoding('utf8');
+
+process.stdin.on('readable', () => 
+{
+  chunk = process.stdin.read();
+  if (chunk !== null)
+   {
+    //displaying the file nam enterd by the user
+    chunk=chunk.slice(0, chunk.length - 1);
+    console.log(chunk);
+
+    process.stdout.write(`data: ${chunk}`);
+
+    getoddline(chunk);
+   }
+});
+
+process.stdin.on('end', () => 
+{
+  process.stdout.write('end');
+});
+//displaying the file name user has entered
+//console.log("You have entered : " + chunk);
+//function call for input file
